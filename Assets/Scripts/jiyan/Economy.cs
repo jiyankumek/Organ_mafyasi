@@ -8,11 +8,11 @@ public class Economy : MonoBehaviour
     public TMP_Text text_Money;
     public GameObject yeterliParaYok;
 
-    private float money=100;
+    public float money=250;
     // Start is called before the first frame update
     void Start()
     {
-        
+        text_Money.text = money.ToString();
     }
 
     // Update is called once per frame
