@@ -7,7 +7,7 @@ public class PC : MonoBehaviour
 {
     public float raycastLength = 5f; // Raycast ýþýnýnýn uzunluðu
     public GameObject PcCanvas; // Açýlacak olan canvas
-    public bool pcCanvasisTrue=false;
+    public bool pcCanvasisTrue;
     public GameObject sedye;
     public Vector3 SpawVector3;
 
@@ -17,17 +17,35 @@ public class PC : MonoBehaviour
     void Start()
     {
         economy= FindObjectOfType<Economy>();
+        pcCanvasisTrue = false;
     }
 
     void Update()
     {
+        if (pcCanvasisTrue == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                PcCanvas.gameObject.SetActive(false);
+                pcCanvasisTrue = false;
+            }
+        }
         RaycastHit hit;
         // Karakterden ileri doðru bir raycast ýþýný çýkar
         if (Physics.Raycast(transform.position, transform.forward, out hit, raycastLength))
         {
+            if (pcCanvasisTrue == true)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    PcCanvas.gameObject.SetActive(false);
+                    pcCanvasisTrue = false;
+                }
+            }
             // Eðer raycast ýþýný "pc" etiketli bir nesneye çarparsa
             if (hit.collider.CompareTag("pc"))
             {
+                Debug.Log("hit");
                 // Eðer "E" tuþuna basýlýrsa
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -46,6 +64,8 @@ public class PC : MonoBehaviour
             PcCanvas.gameObject.SetActive(false);
             pcCanvasisTrue = false;
         }
+
+       
     }
 
     public void Buy_Sedye()

@@ -12,7 +12,7 @@ namespace Knife.RealBlood.SimpleController
     [RequireComponent(typeof(CapsuleCollider))]
     public class PlayerController : MonoBehaviour
     {
-        public PC pc;
+        private PC pc;
 
         public GameObject control;
 
@@ -150,7 +150,7 @@ namespace Knife.RealBlood.SimpleController
             controlCameraPosition = ControlCamera.localPosition;
 
              pc = GetComponent<PC>();
-             control.SetActive(false);
+             UnpausePlayer();
         }
 
         public void UpdateDefaultDeath()
@@ -162,8 +162,8 @@ namespace Knife.RealBlood.SimpleController
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            
-            
+
+            control.SetActive(true);
             isPaused = true;
         }
 
@@ -172,10 +172,7 @@ namespace Knife.RealBlood.SimpleController
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             control.SetActive(false);
-            if (pc.pcCanvasisTrue == true)
-            {
-                control.SetActive(true);
-            }
+            
             Freeze(false);
             isPaused = false;
         }
@@ -192,11 +189,11 @@ namespace Knife.RealBlood.SimpleController
             UpdatePlayer();
             if (pc.pcCanvasisTrue == true)
             {
-                control.SetActive(true);
+                PausePlayer();
             }
             else if(pc.pcCanvasisTrue==false)
             {
-                control.SetActive(false);
+               UnpausePlayer();
             }
         }
 
