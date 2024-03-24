@@ -30,49 +30,39 @@ public class PC : MonoBehaviour
                 pcCanvasisTrue = false;
             }
         }
-        RaycastHit hit;
-        // Karakterden ileri doðru bir raycast ýþýný çýkar
-        if (Physics.Raycast(transform.position, transform.forward, out hit, raycastLength))
+        else // Canvas kapalýyken
         {
-            if (pcCanvasisTrue == true)
+            RaycastHit hit;
+            // Karakterden ileri doðru bir raycast ýþýný çýkar
+            if (Physics.Raycast(transform.position, transform.forward, out hit, raycastLength))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                // Eðer raycast ýþýný "pc" etiketli bir nesneye çarparsa
+                if (hit.collider.CompareTag("pc"))
                 {
-                    PcCanvas.gameObject.SetActive(false);
-                    pcCanvasisTrue = false;
+                    Debug.Log("hit");
+                    // Eðer "E" tuþuna basýlýrsa
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        // Canvas'ý aktif hale getir
+                        PcCanvas.gameObject.SetActive(true);
+                        pcCanvasisTrue = true;
+                    }
                 }
             }
-            // Eðer raycast ýþýný "pc" etiketli bir nesneye çarparsa
-            if (hit.collider.CompareTag("pc"))
-            {
-                Debug.Log("hit");
-                // Eðer "E" tuþuna basýlýrsa
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    // Canvas'ý aktif hale getir
-                    PcCanvas.gameObject.SetActive(true);
-                    pcCanvasisTrue=true;
-                   
-                }
-               
-
-            }
-            
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PcCanvas.gameObject.SetActive(false);
             pcCanvasisTrue = false;
         }
-
-       
     }
+
 
     public void Buy_Sedye()
     {
         if (economy.money >= 100)
         {
-            economy.money = economy.money - 100;
+            economy.ParaCikar(100);
             Instantiate(sedye, SpawVector3, Quaternion.identity);
         }
         else
