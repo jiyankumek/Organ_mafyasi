@@ -8,6 +8,7 @@ TagManager:
   - obje
   - kesilecek
   - kalp
+  - dolap
   layers:
   - Default
   - TransparentFX

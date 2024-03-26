@@ -6,21 +6,28 @@ using UnityEngine;
 public class PC : MonoBehaviour
 {
     public float raycastLength = 5f; // Raycast ýþýnýnýn uzunluðu
+
     public GameObject PcCanvas; // Açýlacak olan canvas
+    public GameObject sell;
+    public GameObject buy;
+    
+
     public bool pcCanvasisTrue;
     public bool releaseFlag = false;
+
     public GameObject sedye;
     public GameObject kesilecekYer;
     public GameObject kalp;
     public GameObject heldObject; // Elinde tutulan objeyi tutmak için bir GameObject referansý
-
+   
 
     public Transform hand;
+    public Transform organdolabi;
+
+    public Vector3 organKonumu;
     public Vector3 SpawVector3;
 
     private Economy economy;
-
-
 
 
     void Start()
@@ -31,6 +38,7 @@ public class PC : MonoBehaviour
 
     void Update()
     {
+       
         if (pcCanvasisTrue)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -63,6 +71,7 @@ public class PC : MonoBehaviour
                 {
                     PcCanvas.SetActive(true);
                     pcCanvasisTrue = true;
+                    
                 }
 
                 if (hit.collider.CompareTag("obje") &&
@@ -101,6 +110,42 @@ public class PC : MonoBehaviour
                 }
                 
             }
+            if(hit.collider.CompareTag("dolap"))
+            {
+                if (Input.GetMouseButton(0)&&heldObject.CompareTag("kalp"))
+                {
+                    heldObject.GetComponent<Rigidbody>().isKinematic = false;
+                    heldObject.GetComponent<Rigidbody>().useGravity = true;
+                    heldObject.GetComponent<Collider>().enabled = true;
+                    heldObject.transform.SetParent(organdolabi);
+                    heldObject.transform.localPosition = organKonumu;
+                    heldObject = null;
+                    
+                }
+
+                if (heldObject == null && Input.GetKeyDown(KeyCode.E))
+                {
+                    // organdolabi'nin çocuk objelerini döngüye alarak iþlem yapalým
+                    foreach (Transform childTransform in organdolabi.transform)
+                    {
+                        GameObject child = childTransform.gameObject; // Transform'u GameObject'e çeviriyoruz
+                        // Çocuk objenin tag'ini kontrol edelim
+                        if (child.CompareTag("kalp"))
+                        {
+                            heldObject = child; // child'i heldObject'e atýyoruz
+                            heldObject.transform.SetParent(hand);
+                            heldObject.transform.localPosition = Vector3.zero;
+                            heldObject.GetComponent<Rigidbody>().isKinematic = true;
+                            heldObject.GetComponent<Rigidbody>().useGravity = false;
+                            heldObject.GetComponent<Collider>().enabled = false;
+                            break;
+                        }
+                    }
+                }
+
+
+
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.F) && heldObject != null) // Eðer 'E' tuþu býrakýldýysa ve elinde bir obje varsa 
@@ -111,14 +156,9 @@ public class PC : MonoBehaviour
             heldObject.GetComponent<Collider>().enabled = true;
             heldObject.transform.SetParent(null);
             heldObject = null;
+
         }
     }
-
-
-
-
-
-
 
     public void Buy_Sedye()
     {
@@ -133,6 +173,17 @@ public class PC : MonoBehaviour
         }
     }
 
+    public void Deepweb()
+    {
+        buy.SetActive(false);
+        sell.SetActive(true);
+    }
 
+    public void Toptanci()
+    {
+        sell.SetActive(false);
+        buy.SetActive(true);
+    }
 
+ 
 }
