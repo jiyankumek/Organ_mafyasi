@@ -28,11 +28,13 @@ public class PC : MonoBehaviour
     public Vector3 SpawVector3;
 
     private Economy economy;
+    private Organ_dolabi organDolabi;
 
 
     void Start()
     {
         economy= FindObjectOfType<Economy>();
+        organDolabi = FindObjectOfType<Organ_dolabi>();
         pcCanvasisTrue = false;
     }
 
@@ -123,7 +125,7 @@ public class PC : MonoBehaviour
                     
                 }
 
-                if (heldObject == null && Input.GetKeyDown(KeyCode.E))
+                if (heldObject == null && Input.GetKeyDown(KeyCode.E))//dolaba koyma
                 {
                     // organdolabi'nin çocuk objelerini döngüye alarak iþlem yapalým
                     foreach (Transform childTransform in organdolabi.transform)
@@ -138,13 +140,20 @@ public class PC : MonoBehaviour
                             heldObject.GetComponent<Rigidbody>().isKinematic = true;
                             heldObject.GetComponent<Rigidbody>().useGravity = false;
                             heldObject.GetComponent<Collider>().enabled = false;
+
+                            
+                            Debug.Log("Kalp objesi collider'dan çýktý!");
+
+                            // Collider içinden çýkan obje "kalp" tag'ine sahip ise listeden çýkar
+                            organDolabi.kalplerListesi.Remove(child);
+
+                            // Liste boyutunu kontrol et
+                            Debug.Log("Kalpler listesinin boyutu: " + organDolabi.kalplerListesi.Count);
+
                             break;
                         }
                     }
                 }
-
-
-
             }
         }
 
