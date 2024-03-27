@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 7143538419911805108}
   - component: {fileID: 8870247036791974707}
   - component: {fileID: 182186520997915699}
+  - component: {fileID: 7749461659861190531}
   m_Layer: 5
   m_Name: Organ_satis_UI
   m_TagString: Untagged
@@ -270,6 +271,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7749461659861190531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2511179759340131184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46287138432c8a46ac08bdaa742f744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  satisInput: {fileID: 1711622079394374556}
 --- !u!1 &3306043122695659915
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +590,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5074047968890245454}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7749461659861190531}
+        m_TargetAssemblyTypeName: Satilacak_Organ, Assembly-CSharp
+        m_MethodName: Sell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7879741097748905603
 GameObject:
   m_ObjectHideFlags: 0

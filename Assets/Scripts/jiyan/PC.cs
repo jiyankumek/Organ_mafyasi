@@ -13,16 +13,16 @@ public class PC : MonoBehaviour
     
 
     public bool pcCanvasisTrue;
-    public bool releaseFlag = false;
 
     public GameObject sedye;
     public GameObject kesilecekYer;
     public GameObject kalp;
     public GameObject heldObject; // Elinde tutulan objeyi tutmak için bir GameObject referansý
-   
+    public GameObject Organ_satis;
 
     public Transform hand;
     public Transform organdolabi;
+    public Transform content_satis;
 
     public Vector3 organKonumu;
     public Vector3 SpawVector3;
@@ -47,6 +47,11 @@ public class PC : MonoBehaviour
             {
                 PcCanvas.gameObject.SetActive(false);
                 pcCanvasisTrue = false;
+                foreach (Transform child in content_satis.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+
             }
         }
         else // Canvas kapalýyken
@@ -73,7 +78,11 @@ public class PC : MonoBehaviour
                 {
                     PcCanvas.SetActive(true);
                     pcCanvasisTrue = true;
-                    
+                    foreach (var organ in organDolabi.kalplerListesi)
+                    {
+                        Instantiate(Organ_satis, content_satis);
+                        Destroy(Organ_satis);
+                    }
                 }
 
                 if (hit.collider.CompareTag("obje") &&
