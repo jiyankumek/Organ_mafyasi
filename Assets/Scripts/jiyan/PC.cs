@@ -10,6 +10,8 @@ public class PC : MonoBehaviour
     public GameObject PcCanvas; // Açýlacak olan canvas
     public GameObject sell;
     public GameObject buy;
+    public GameObject ilanlarým;
+    public GameObject ilanVer;
     
 
     public bool pcCanvasisTrue;
@@ -81,7 +83,7 @@ public class PC : MonoBehaviour
                     foreach (var organ in organDolabi.kalplerListesi)
                     {
                         Instantiate(Organ_satis, content_satis);
-                        Destroy(Organ_satis);
+                       // Destroy(Organ_satis);
                     }
                 }
 
@@ -203,5 +205,16 @@ public class PC : MonoBehaviour
         buy.SetActive(true);
     }
 
- 
+    public void Ilan_ver()
+    {
+        ilanVer.SetActive(true);
+        ilanlarým.SetActive(false);
+    }
+
+    public void Ilanlarým()
+    {
+        ilanlarým.SetActive(true);
+        ilanVer.SetActive(false);
+    }
+
 }
