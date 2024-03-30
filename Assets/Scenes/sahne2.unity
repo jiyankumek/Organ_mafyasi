@@ -1414,7 +1414,11 @@ MonoBehaviour:
   dayDuration: 60
   sun: {fileID: 1971386138}
 <<<<<<< HEAD
+<<<<<<< HEAD
   dayColor: {r: 0.96600986, g: 0.9811321, b: 0.7441794, a: 0}
+=======
+  dayColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0}
+>>>>>>> parent of 9615af5 (2)
 =======
   dayColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0}
 >>>>>>> parent of 9615af5 (2)
