@@ -1376,7 +1376,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1239338093}
-  - component: {fileID: 1239338092}
   m_Layer: 0
   m_Name: GECE
   m_TagString: Untagged
@@ -1384,23 +1383,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1239338092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239338091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f795d669cfa204bb55228290ed147b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayDuration: 60
-  sun: {fileID: 1971386138}
-  dayColor: {r: 0.9245283, g: 0.9027234, b: 0.9027234, a: 0}
-  nightColor: {r: 0, g: 0, b: 0, a: 0}
-  clockText: {fileID: 1272990747}
 --- !u!4 &1239338093
 Transform:
   m_ObjectHideFlags: 0
