@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.004093038, g: 0.0002239816, b: 0.000000057254947, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1377,6 +1377,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1239338093}
   - component: {fileID: 1239338094}
+  - component: {fileID: 1239338096}
+  - component: {fileID: 1239338095}
+  - component: {fileID: 1239338097}
   m_Layer: 0
   m_Name: GECE
   m_TagString: Untagged
@@ -1406,7 +1409,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239338091}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f795d669cfa204bb55228290ed147b, type: 3}
   m_Name: 
@@ -1416,6 +1419,52 @@ MonoBehaviour:
   dayColor: {r: 0.96600986, g: 0.9811321, b: 0.7441794, a: 0}
   nightColor: {r: 0, g: 0, b: 0, a: 0}
   clockText: {fileID: 1272990747}
+--- !u!114 &1239338095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239338091}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3340832a6013be44fa7db08daa85e576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 1971386138}
+  dayDuration: 60
+--- !u!114 &1239338096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239338091}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f795d669cfa204bb55228290ed147b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayDuration: 86400
+  sun: {fileID: 0}
+  dayColor: {r: 0, g: 0, b: 0, a: 0}
+  nightColor: {r: 0, g: 0, b: 0, a: 0}
+  clockText: {fileID: 0}
+--- !u!114 &1239338097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239338091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1343161fd5bbf6459cedfb5634d3a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 1971386138}
+  clockText: {fileID: 1272990747}
+  dayDuration: 60
 --- !u!1 &1272990746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,13 +1718,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971386137}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.9659258, y: 0, z: 0, w: 0.2588191}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: -150, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
