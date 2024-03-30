@@ -1408,14 +1408,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239338091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f795d669cfa204bb55228290ed147b, type: 3}
+  m_Script: {fileID: 11500000, guid: e1343161fd5bbf6459cedfb5634d3a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayDuration: 60
   sun: {fileID: 1971386138}
-  dayColor: {r: 0.96600986, g: 0.9811321, b: 0.7441794, a: 0}
-  nightColor: {r: 0, g: 0, b: 0, a: 0}
   clockText: {fileID: 1272990747}
+  dayDuration: 60
 --- !u!1 &1272990746
 GameObject:
   m_ObjectHideFlags: 0
