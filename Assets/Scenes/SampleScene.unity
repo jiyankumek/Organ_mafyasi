@@ -8453,7 +8453,7 @@ MonoBehaviour:
   kesilecekYer: {fileID: 891387065}
   kalp: {fileID: 781981163}
   heldObject: {fileID: 0}
-  Organ_satis: {fileID: 2511179759340131184, guid: cfe5d3d72d06b9646bd1c626855714e5, type: 3}
+  Organ_satis: {fileID: 8198021101611459437, guid: 412cf4bcf7d2e97489a9a9ff198eb8eb, type: 3}
   hand: {fileID: 5986366535280614112}
   organdolabi: {fileID: 759883694}
   content_satis: {fileID: 1771292479}

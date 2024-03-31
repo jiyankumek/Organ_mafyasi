@@ -13,11 +13,7 @@ public class Ilanlarım : MonoBehaviour
     private Satilacak_Organ satilacakOrgan;
 
     // Start is called before the first frame update
-    void Awake()
-    {
-        satilacakOrgan = FindObjectOfType<Satilacak_Organ>();
-        price.text = satilacakOrgan.satisInput.text;
-    }
+    
 
     // Update is called once per frame
     void Update()
