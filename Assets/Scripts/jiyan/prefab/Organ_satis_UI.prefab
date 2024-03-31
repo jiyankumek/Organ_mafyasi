@@ -284,6 +284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   satisInput: {fileID: 1711622079394374556}
+  ilanlar: {fileID: 5017789251249236747, guid: b8af331de2f2be047b2a837c9af5332a, type: 3}
+  ilanlarContent: {fileID: 0}
 --- !u!1 &3306043122695659915
 GameObject:
   m_ObjectHideFlags: 0

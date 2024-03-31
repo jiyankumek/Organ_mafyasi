@@ -25,6 +25,7 @@ public class PC : MonoBehaviour
     public Transform hand;
     public Transform organdolabi;
     public Transform content_satis;
+    public Transform contentIlanlarým;
 
     public Vector3 organKonumu;
     public Vector3 SpawVector3;
@@ -45,6 +46,7 @@ public class PC : MonoBehaviour
        
         if (pcCanvasisTrue)
         {
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
                 PcCanvas.gameObject.SetActive(false);

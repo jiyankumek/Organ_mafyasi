@@ -7,6 +7,10 @@ public class Satilacak_Organ : MonoBehaviour
 {
     public TMP_InputField satisInput;
 
+    public GameObject ilanlar;
+
+    public int fiyat;
+
     private Economy economy;
     private Organ_dolabi organDolabi;
     private PC pc;
@@ -26,18 +30,20 @@ public class Satilacak_Organ : MonoBehaviour
 
 
     public void Sell()
-    { 
+    {
+        Instantiate(ilanlar, pc.contentIlanlarým);
         // Input alanýndaki metni alýp bir tam sayýya dönüþtürüyoruz
-        int fiyat;
+
         if (!int.TryParse(satisInput.text, out fiyat))
         {
             Debug.LogError("Geçersiz fiyat giriþi!");
             return;
         }
-        
 
+        
         // Satýþ fiyatý belirlendiði zaman prefabý yok ediyoruz
         Destroy(gameObject);
+
         foreach (Transform childTransform in pc.organdolabi.transform)
         {
             Debug.Log("Child obje bulundu: " + childTransform.name);
@@ -57,6 +63,4 @@ public class Satilacak_Organ : MonoBehaviour
 
         economy.ParaEkle(fiyat);
     }
-    
-
 }
