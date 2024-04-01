@@ -9,11 +9,13 @@ public class health2 : MonoBehaviour
 {
     public Image healthBar;
     public TMP_Text healthText;
+    public Image gameOverImage; // Oyun sonu ekranýnýzý buraya sürükleyin
     private int health = 100;
 
     void Start()
     {
         UpdateHealthBar();
+        gameOverImage.enabled = false; // Oyun baþladýðýnda oyun sonu ekranýný gizle
     }
 
     void Update()
@@ -44,7 +46,7 @@ public class health2 : MonoBehaviour
 
     void GameOver()
     {
-        // Oyunu tamamen durdur
-        EditorApplication.isPlaying = false;
+        // Oyun sonu ekranýný göster
+        gameOverImage.enabled = true;
     }
 }
