@@ -9,6 +9,8 @@ TagManager:
   - kesilecek
   - kalp
   - dolap
+  - aspirin
+  - ilac
   layers:
   - Default
   - TransparentFX
