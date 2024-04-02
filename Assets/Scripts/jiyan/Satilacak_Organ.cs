@@ -20,6 +20,7 @@ public class Satilacak_Organ : MonoBehaviour
     private Organ_dolabi organDolabi;
     private PC pc;
 
+    public float onerilenFiyat=100f;
     private float fiyat;
 
     void Start()
@@ -27,6 +28,7 @@ public class Satilacak_Organ : MonoBehaviour
         economy = FindObjectOfType<Economy>();
         organDolabi = FindObjectOfType<Organ_dolabi>();
         pc = FindObjectOfType<PC>();
+        
     }
 
     public void Sell()
@@ -80,7 +82,7 @@ public class Satilacak_Organ : MonoBehaviour
         else
         {
             sayiGiriniz.SetActive(true);
-            return;
+            
         }
     }
 
@@ -102,5 +104,23 @@ public class Satilacak_Organ : MonoBehaviour
         // Fiyatý satisInput alanýnýn metin deðeriyle eþitle
         satisInput.text = fiyat.ToString();
     }
+    private float SatisSuresiBelirle(float fiyat)
+    {
+        float satisSuresi = 0f;
+
+        if (fiyat < onerilenFiyat)
+        {
+            // Fiyat, önerilen fiyatýn altýndaysa, satýþ süresi 5-15 saniye arasýnda olacak
+            satisSuresi = Random.Range(5f, 15f);
+        }
+        else if (fiyat <= onerilenFiyat +99.99f)
+        {
+            // Fiyat, önerilen fiyat ile bu fiyatýn %99.99'u arasýndaysa, satýþ süresi 20-40 saniye arasýnda olacak
+            satisSuresi = Random.Range(20f, 40f);
+        }
+
+        return satisSuresi;
+    }
+
 
 }
