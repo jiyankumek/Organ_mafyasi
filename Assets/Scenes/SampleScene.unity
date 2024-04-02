@@ -155,8 +155,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 525323127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.33333325}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1087,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4773112130870457207, guid: 1e4b772bf444a8343a23a144f149e1ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.818
+      value: 0.101
       objectReference: {fileID: 0}
     - target: {fileID: 4773112130870457207, guid: 1e4b772bf444a8343a23a144f149e1ac, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1685,7 +1685,7 @@ GameObject:
   - component: {fileID: 703909224}
   - component: {fileID: 703909227}
   m_Layer: 0
-  m_Name: dolap1
+  m_Name: dolap1_collider
   m_TagString: dolap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2550,7 +2550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 143.96925, y: -88.50092}
+  m_AnchoredPosition: {x: 143.96925, y: 96}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &824915224
@@ -2607,7 +2607,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2636,7 +2636,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 149.01236, w: 33.312767}
+  m_margin: {x: -2.705597, y: 34.60849, z: 149.01236, w: 0.20817566}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4461,10 +4461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1319824725}
-  - component: {fileID: 1319824722}
   - component: {fileID: 1319824726}
-  - component: {fileID: 1319824728}
-  - component: {fileID: 1319824727}
   m_Layer: 0
   m_Name: manager
   m_TagString: Untagged
@@ -4472,29 +4469,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1319824722
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1319824720}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1319824725
 Transform:
   m_ObjectHideFlags: 0
@@ -4504,7 +4478,7 @@ Transform:
   m_GameObject: {fileID: 1319824720}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.06, z: 0}
+  m_LocalPosition: {x: 0, y: -0.865, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4525,33 +4499,6 @@ MonoBehaviour:
   text_Money: {fileID: 972008629}
   yeterliParaYok: {fileID: 1119638648}
   money: 100
---- !u!114 &1319824727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1319824720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e50099be3b78e54b9020d2337776e10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 1319824728}
---- !u!114 &1319824728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1319824720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c933b3200c1be438c3f87f91f03259, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 151090128}
-  healthText: {fileID: 236123229}
 --- !u!1 &1332782995
 GameObject:
   m_ObjectHideFlags: 0
@@ -5451,9 +5398,9 @@ RectTransform:
   m_Father: {fileID: 54879194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1655705732
 MonoBehaviour:
@@ -6373,7 +6320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1980667818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6921,7 +6868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4773112130870457207, guid: 1e4b772bf444a8343a23a144f149e1ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.818
+      value: -0.446
       objectReference: {fileID: 0}
     - target: {fileID: 4773112130870457207, guid: 1e4b772bf444a8343a23a144f149e1ac, type: 3}
       propertyPath: m_LocalPosition.y
