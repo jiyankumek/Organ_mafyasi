@@ -22,14 +22,14 @@ public class PC : MonoBehaviour
     public GameObject kalp;
     public GameObject heldObject; // Elinde tutulan objeyi tutmak için bir GameObject referansý
     public GameObject Organ_satis;
-    public GameObject teklifListesi;
+    
 
    
     public Transform hand;
     public Transform organdolabi;
     public Transform content_satis;
     public Transform contentIlanlarým;
-    public Transform contentTeklifListesi;
+    
 
     public Vector3 organKonumu;
     public Vector3 SpawVector3;
@@ -225,30 +225,5 @@ public class PC : MonoBehaviour
         ilanVer.SetActive(false);
     }
 
-    public void Tekliflistesi_Sat()
-    {
-        foreach (Transform child in contentTeklifListesi)
-        {
-            // Child'i yok et
-            Destroy(child.gameObject);
-        }
-
-        foreach (Transform child in contentIlanlarým)
-        {
-            teklifListesi.SetActive(false);
-            Destroy(child.gameObject);
-        }
-    }
-
-    public void Tekliflistesi_Satma()
-    {
-        
-        foreach (Transform child in contentTeklifListesi)
-        {
-            // Child'i yok et
-            Destroy(child.gameObject);
-        }
-        teklifListesi.SetActive(false);
-        
-    }
+    
 }

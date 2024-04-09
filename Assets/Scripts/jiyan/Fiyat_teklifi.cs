@@ -11,14 +11,14 @@ public class Fiyat_teklifi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        satilacakOrgan = FindObjectOfType<Satilacak_Organ>();
+        satilacakOrgan = GetComponentInParent<Satilacak_Organ>();
         if (satilacakOrgan.fiyat < satilacakOrgan.onerilenFiyat)
         {
             fiyatTeklifi.text = Random.Range(satilacakOrgan.fiyat, satilacakOrgan.fiyat - 10).ToString("0.00") + "$";
         }
         else if (satilacakOrgan.fiyat > satilacakOrgan.onerilenFiyat)
         {
-            fiyatTeklifi.text = Random.Range(satilacakOrgan.onerilenFiyat+10, satilacakOrgan.onerilenFiyat - 20).ToString("0.00") + "$";
+            fiyatTeklifi.text = Random.Range(satilacakOrgan.onerilenFiyat + 10, satilacakOrgan.onerilenFiyat - 20).ToString("0.00") + "$";
         }
     }
 
@@ -27,4 +27,6 @@ public class Fiyat_teklifi : MonoBehaviour
     {
         
     }
+
+   
 }
