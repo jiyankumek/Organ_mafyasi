@@ -7,11 +7,12 @@ public class PC : MonoBehaviour
 {
     public float raycastLength = 5f; // Raycast ýþýnýnýn uzunluðu
 
-    public GameObject PcCanvas; // Açýlacak olan canvas
+    public Canvas PcCanvas; // Açýlacak olan canvas
     public GameObject sell;
     public GameObject buy;
     public GameObject ilanlarým;
     public GameObject ilanVer;
+    public GameObject teklifPrefab;
     
 
     public bool pcCanvasisTrue;
@@ -21,11 +22,14 @@ public class PC : MonoBehaviour
     public GameObject kalp;
     public GameObject heldObject; // Elinde tutulan objeyi tutmak için bir GameObject referansý
     public GameObject Organ_satis;
+    public GameObject teklifListesi;
 
+   
     public Transform hand;
     public Transform organdolabi;
     public Transform content_satis;
     public Transform contentIlanlarým;
+    public Transform contentTeklifListesi;
 
     public Vector3 organKonumu;
     public Vector3 SpawVector3;
@@ -39,6 +43,7 @@ public class PC : MonoBehaviour
         economy= FindObjectOfType<Economy>();
         organDolabi = FindObjectOfType<Organ_dolabi>();
         pcCanvasisTrue = false;
+        
     }
 
     void Update()
@@ -49,7 +54,7 @@ public class PC : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.E))
             {
-                PcCanvas.gameObject.SetActive(false);
+                PcCanvas.enabled = false;
                 pcCanvasisTrue = false;
                 foreach (Transform child in content_satis.transform)
                 {
@@ -64,7 +69,7 @@ public class PC : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PcCanvas.gameObject.SetActive(false);
+                PcCanvas.enabled = false;
                 pcCanvasisTrue = false;
             }
         }
@@ -80,7 +85,8 @@ public class PC : MonoBehaviour
             {
                 if (hit.collider.CompareTag("pc"))
                 {
-                    PcCanvas.SetActive(true);
+                    PcCanvas.enabled = true;
+
                     pcCanvasisTrue = true;
                     foreach (var organ in organDolabi.kalplerListesi)
                     {
@@ -210,13 +216,39 @@ public class PC : MonoBehaviour
     public void Ilan_ver()
     {
         ilanVer.SetActive(true);
-        ilanlarým.SetActive(false);
+        
     }
 
     public void Ilanlarým()
     {
-        ilanlarým.SetActive(true);
+      
         ilanVer.SetActive(false);
     }
 
+    public void Tekliflistesi_Sat()
+    {
+        foreach (Transform child in contentTeklifListesi)
+        {
+            // Child'i yok et
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in contentIlanlarým)
+        {
+            teklifListesi.SetActive(false);
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void Tekliflistesi_Satma()
+    {
+        
+        foreach (Transform child in contentTeklifListesi)
+        {
+            // Child'i yok et
+            Destroy(child.gameObject);
+        }
+        teklifListesi.SetActive(false);
+        
+    }
 }

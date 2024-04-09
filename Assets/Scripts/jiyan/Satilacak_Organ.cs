@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Satilacak_Organ : MonoBehaviour
@@ -15,20 +16,24 @@ public class Satilacak_Organ : MonoBehaviour
     public GameObject OrganGameObject;
     public GameObject ÝnputGameObject;
     public GameObject sayiGiriniz;
+    public GameObject teklifFoto;
+    public GameObject organFoto;
+    public GameObject fiyatTeklifPrefab;
 
     private Economy economy;
     private Organ_dolabi organDolabi;
     private PC pc;
+    private Fiyat_teklifi fiyatTeklifi;
 
-    public float onerilenFiyat=100f;
-    private float fiyat;
+    public float onerilenFiyat = 100f;
+    public float fiyat;
 
     void Start()
     {
         economy = FindObjectOfType<Economy>();
         organDolabi = FindObjectOfType<Organ_dolabi>();
         pc = FindObjectOfType<PC>();
-        
+        fiyatTeklifi = FindObjectOfType<Fiyat_teklifi>();
     }
 
     public void Sell()
@@ -40,14 +45,16 @@ public class Satilacak_Organ : MonoBehaviour
             return;
         }
 
-        sellButton.SetActive(false);
-        changepriceButton.SetActive(true);
-        gameObject.transform.SetParent(pc.contentIlanlarým);
-        OrganGameObject.SetActive(false);
         ÝnputGameObject.SetActive(false);
+        sellButton.SetActive(false);
+        organFoto.SetActive(false);
+        changepriceButton.SetActive(true);
+        gameObject.transform.SetParent(pc.contentIlanlarým.transform);
 
+        StartCoroutine(SatisSuresiBelirle(fiyat));
+        
         price.text = fiyat.ToString("0.00") + "$";
-        foreach (Transform childTransform in pc.organdolabi.transform)
+        foreach (Transform childTransform in pc.organdolabi.transform)//burada dolaptaki objeleri siliyor
         {
             GameObject child = childTransform.gameObject;
             if (child.CompareTag("kalp"))
@@ -59,7 +66,7 @@ public class Satilacak_Organ : MonoBehaviour
             }
         }
 
-        economy.ParaEkle(fiyat);
+
     }
 
     public void Change_Price()
@@ -82,7 +89,6 @@ public class Satilacak_Organ : MonoBehaviour
         else
         {
             sayiGiriniz.SetActive(true);
-            
         }
     }
 
@@ -104,23 +110,55 @@ public class Satilacak_Organ : MonoBehaviour
         // Fiyatý satisInput alanýnýn metin deðeriyle eþitle
         satisInput.text = fiyat.ToString();
     }
-    private float SatisSuresiBelirle(float fiyat)
+
+    private IEnumerator SatisSuresiBelirle(float fiyat)
     {
-        float satisSuresi = 0f;
+        float satisSuresi;
 
         if (fiyat < onerilenFiyat)
         {
             // Fiyat, önerilen fiyatýn altýndaysa, satýþ süresi 5-15 saniye arasýnda olacak
             satisSuresi = Random.Range(5f, 15f);
         }
-        else if (fiyat <= onerilenFiyat +99.99f)
+        else if (fiyat < onerilenFiyat + 99.99f)
         {
-            // Fiyat, önerilen fiyat ile bu fiyatýn %99.99'u arasýndaysa, satýþ süresi 20-40 saniye arasýnda olacak
+            // Fiyat, önerilen fiyat ile bu fiyatýn +99.99'u arasýndaysa, satýþ süresi 20-40 saniye arasýnda olacak
             satisSuresi = Random.Range(20f, 40f);
         }
+        else
+        {
+            satisSuresi = Random.Range(200f, 300f);
+        }
 
-        return satisSuresi;
+        float kalanSure = satisSuresi;
+
+        while (kalanSure > 0)
+        {
+            yield return new WaitForSeconds(1);
+            kalanSure--;
+
+            Debug.Log("Kalan Süre: " + kalanSure); // Kalan süreyi kontrol etmek için Debug.Log kullanýmý
+        }
+
+        Debug.Log("Zaman doldu!");
+        teklifFoto.SetActive(true);
+        organFoto.SetActive(false);
+        
+        
     }
 
+    public void Teklif_Foto_button()
+    {
 
+        foreach (Transform child in pc.contentTeklifListesi)//burasý teklifleri siliyor
+        {
+            // Child'i yok et
+            Destroy(child.gameObject);
+        }
+        
+        Instantiate(fiyatTeklifPrefab, pc.contentTeklifListesi);
+        pc.teklifListesi.SetActive(false);
+        pc.teklifListesi.SetActive(true);
+        
+    }
 }

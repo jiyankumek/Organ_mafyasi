@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4712acbb4ebdf146bdfc2d4243fbee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fiyatTeklifi: {fileID: 2895060492133309076}
 --- !u!1 &7016501659342278332
 GameObject:
   m_ObjectHideFlags: 0
