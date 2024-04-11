@@ -12,17 +12,12 @@ public class Economy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text_Money.text = money.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1))
-        {
-            ParaEkle(100);
-            Debug.Log(money);
-        }
+        text_Money.text = money.ToString("0.00") + "$";
     }
 
     public void ParaEkle(float eklenecek_Money)

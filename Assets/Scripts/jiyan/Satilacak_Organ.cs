@@ -22,11 +22,13 @@ public class Satilacak_Organ : MonoBehaviour
     public GameObject teklifListesi;
 
     public Transform contentTeklifListesi;
+    public bool satisyapildi=false;
 
     private Economy economy;
     private Organ_dolabi organDolabi;
     private PC pc;
     private Fiyat_teklifi fiyatTeklifi;
+    private Coroutine satisCoroutine; // Coroutine referansýný sakla
 
     public float onerilenFiyat = 100f;
     public float fiyat;
@@ -36,22 +38,28 @@ public class Satilacak_Organ : MonoBehaviour
         economy = FindObjectOfType<Economy>();
         organDolabi = FindObjectOfType<Organ_dolabi>();
         pc = FindObjectOfType<PC>();
-        
+        fiyatTeklifi = FindObjectOfType<Fiyat_teklifi>();
+
     }
 
     public void Organ_Satildi() //organlarý dolaptan silen fonksiyon
     {
+        
         foreach (Transform childTransform in pc.organdolabi.transform)//burada dolaptaki objeleri siliyor
         {
             GameObject child = childTransform.gameObject;
             if (child.CompareTag("kalp"))
             {
+                
                 Destroy(child);
                 organDolabi.kalplerListesi.Remove(child);
                 Debug.Log("kalp sil");
+                
                 break;
             }
+           
         }
+        Destroy(gameObject);
     }
     public void Sell()
     {
@@ -72,9 +80,10 @@ public class Satilacak_Organ : MonoBehaviour
         
         price.text = fiyat.ToString("0.00") + "$";
        
-        Organ_Satildi();
+        
 
     }
+
 
     public void Change_Price()
     {
@@ -83,8 +92,11 @@ public class Satilacak_Organ : MonoBehaviour
 
     public void Edit_Price()
     {
+
         inputPrice.SetActive(false);
 
+        Debug.Log(satisCoroutine);
+        
         float floatVal;
         bool isFloat = float.TryParse(newPrice.text, out floatVal);
 
@@ -92,12 +104,20 @@ public class Satilacak_Organ : MonoBehaviour
         {
             price.text = floatVal.ToString("0.00") + "$";
             sayiGiriniz.SetActive(false);
+            teklifFoto.SetActive(false);
+            fiyat = floatVal;
+           
+
+            // Yeni bir satýþ süresi belirleme Coroutine'u baþlat ve referansýný sakla
+            satisCoroutine = StartCoroutine(SatisSuresiBelirle(fiyat));
+
         }
         else
         {
             sayiGiriniz.SetActive(true);
         }
     }
+
 
     public void Close_sayiGiriniz()
     {
@@ -113,9 +133,11 @@ public class Satilacak_Organ : MonoBehaviour
             fiyat = 0f; // Hata durumunda fiyatý sýfýrla veya baþka bir deðere eþitle
             return;
         }
+        
 
         // Fiyatý satisInput alanýnýn metin deðeriyle eþitle
         satisInput.text = fiyat.ToString();
+        
     }
 
     private IEnumerator SatisSuresiBelirle(float fiyat)
@@ -150,7 +172,10 @@ public class Satilacak_Organ : MonoBehaviour
         Debug.Log("Zaman doldu!");
         teklifFoto.SetActive(true);
         organFoto.SetActive(false);
-        
+
+        // Coroutine tamamlandýðýnda, referansý null olarak ayarla
+        satisCoroutine = null;
+
 
 
     }
@@ -177,17 +202,9 @@ public class Satilacak_Organ : MonoBehaviour
     }
     public void Tekliflistesi_Sat()
     {
-        foreach (Transform child in contentTeklifListesi)
-        {
-            // Child'i yok et
-            Destroy(child.gameObject);
-        }
+        Organ_Satildi();
+        satisyapildi = true;
 
-        foreach (Transform child in pc.contentIlanlarým)
-        {
-            teklifListesi.SetActive(false);
-            Destroy(child.gameObject);
-        }
     }
 
     public void Tekliflistesi_Satma()
@@ -199,6 +216,8 @@ public class Satilacak_Organ : MonoBehaviour
             Destroy(child.gameObject);
         }
         teklifListesi.SetActive(false);
+        teklifFoto.SetActive(false);
+        StartCoroutine(SatisSuresiBelirle(fiyat));
 
     }
 }
