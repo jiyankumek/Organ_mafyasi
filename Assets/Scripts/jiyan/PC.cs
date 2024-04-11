@@ -127,7 +127,7 @@ public class PC : MonoBehaviour
                     kesilecekYer.SetActive(false);
                     kalp.GetComponent<Rigidbody>().isKinematic = false;
                     kalp.GetComponent<Rigidbody>().useGravity = true;
-                    
+                    Debug.Log("kesildi ve düþtü");
                 }
                 
             }
