@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PC : MonoBehaviour
 {
-    public float raycastLength = 5f; // Raycast ýþýnýnýn uzunluðu
+    public float raycastLength = 2.5f; // Raycast ýþýnýnýn uzunluðu
 
     public Canvas PcCanvas; // Açýlacak olan canvas
     public GameObject sell;
@@ -26,6 +26,7 @@ public class PC : MonoBehaviour
 
    
     public Transform hand;
+    public Transform objeHand;
     public Transform content_satis;
     public Transform contentIlanlarým;
     
@@ -93,8 +94,18 @@ public class PC : MonoBehaviour
                     }
                 }
 
-                if (hit.collider.CompareTag("obje") &&
-                    heldObject == null) // Eðer 'obje'ye basýldýysa ve elinde bir obje yoksa
+                if (hit.collider.CompareTag("sedye") && heldObject == null)
+                {
+                    heldObject = hit.collider.gameObject;
+                    heldObject.transform.SetParent(objeHand);
+                    heldObject.transform.localPosition = Vector3.zero;
+                    heldObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f); // Sýfýr dönüþ açýlarýna ayarla
+                    heldObject.GetComponent<Rigidbody>().isKinematic = true;
+                    heldObject.GetComponent<Rigidbody>().useGravity = false;
+                    heldObject.GetComponent<Collider>().enabled = true;
+                }
+
+                if (hit.collider.CompareTag("obje") && heldObject == null) // Eðer 'obje'ye basýldýysa ve elinde bir obje yoksa
                 {
                     Debug.Log("nester ");
                     heldObject = hit.collider.gameObject;
@@ -224,6 +235,34 @@ public class PC : MonoBehaviour
             heldObject = null;
 
         }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0) && heldObject.CompareTag("sedye"))
+        {
+            // Yerleþtirme kodu
+            heldObject.transform.position = hit.point; // Objeyi raycast'ýn çarptýðý yere yerleþtir
+            heldObject.GetComponent<Rigidbody>().isKinematic = true; // Objeyi fiziksel etkileþime aç
+            heldObject.GetComponent<Rigidbody>().useGravity = true; // Objeyi fiziksel etkileþime aç
+            heldObject.GetComponent<Collider>().enabled = true; // Objeyi çarpýþmalara aç
+            heldObject.transform.SetParent(null);
+            heldObject = null; // Elindeki objeyi sýfýrla
+        }
+       /* if (heldObject.CompareTag("sedye"))
+        {
+            // Yerleþtirme kodu
+            Vector3 placementPosition = hit.point;
+
+            // Ýki colliderýn yüksekliklerini al
+            float raycastHitHeight = hit.point.y;
+            float colliderHeight = hit.collider.bounds.max.y;
+
+            // Yüksekliði ayarla
+            float finalHeight = Mathf.Max(raycastHitHeight, colliderHeight); // Yükseklikleri karþýlaþtýr ve büyük olaný seç
+
+            // Objeyi yerleþtir
+            placementPosition.y = finalHeight; // Yüksekliði ayarla
+            heldObject.transform.position = placementPosition; // Objeyi raycast'ýn çarptýðý yere yerleþtir
+            heldObject.transform.rotation = Quaternion.Euler(0, 0, 0); // Objeyi döndürme
+        }*/
     }
 
     public void Buy_Sedye()

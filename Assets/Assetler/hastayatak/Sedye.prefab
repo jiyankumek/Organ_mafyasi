@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5083198123735889541
+--- !u!1 &3208834392845662011
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1603810267183118192}
-  - component: {fileID: 8312962322235591422}
-  - component: {fileID: 2349064943411730904}
+  - component: {fileID: 3300892619065343902}
+  - component: {fileID: 7800526781728570893}
+  - component: {fileID: 5431378683942693722}
+  - component: {fileID: 7481415163190759732}
+  - component: {fileID: 8014373084846315272}
   m_Layer: 0
-  m_Name: LAMP_LP:LAMP_03_lowLAMP_03polySurface14
-  m_TagString: Untagged
+  m_Name: Sedye
+  m_TagString: sedye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1603810267183118192
+--- !u!4 &3300892619065343902
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5083198123735889541}
+  m_GameObject: {fileID: 3208834392845662011}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0012811302, y: 0.09679155, z: 0.011660171}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.286285, y: 0.3844018, z: 4.639248}
+  m_LocalScale: {x: 28.322739, y: 28.322739, z: 28.322739}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1454624609376392168}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8312962322235591422
+--- !u!33 &7800526781728570893
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5083198123735889541}
+  m_GameObject: {fileID: 3208834392845662011}
   m_Mesh: {fileID: -6095668985240577262, guid: 6e83245049c8da943b5e333ec5bbd43c, type: 3}
---- !u!23 &2349064943411730904
+--- !u!23 &5431378683942693722
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5083198123735889541}
+  m_GameObject: {fileID: 3208834392845662011}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,35 +87,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &6242928433531050348
-GameObject:
+--- !u!64 &7481415163190759732
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1454624609376392168}
-  m_Layer: 0
-  m_Name: Sedye
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1454624609376392168
-Transform:
+  m_GameObject: {fileID: 3208834392845662011}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6095668985240577262, guid: 6e83245049c8da943b5e333ec5bbd43c, type: 3}
+--- !u!54 &8014373084846315272
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242928433531050348}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.25, y: -2.357, z: 4.309}
-  m_LocalScale: {x: 28.322739, y: 28.322739, z: 28.322739}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1603810267183118192}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 3208834392845662011}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
