@@ -44,21 +44,32 @@ public class Satilacak_Organ : MonoBehaviour
 
     public void Organ_Satildi() //organlarý dolaptan silen fonksiyon
     {
-        
-        foreach (Transform childTransform in pc.organdolabi.transform)//burada dolaptaki objeleri siliyor
+
+        bool kalpSilindi = false; // Her döngü baþýnda bayrak sýfýrlanýr
+
+        foreach (Transform dolapTransform in organDolabi.dolapKapasitesi)
         {
-            GameObject child = childTransform.gameObject;
-            if (child.CompareTag("kalp"))
+            foreach (Transform childTransform in dolapTransform)
             {
-                
-                Destroy(child);
-                organDolabi.kalplerListesi.Remove(child);
-                Debug.Log("kalp sil");
-                
-                break;
+                GameObject child = childTransform.gameObject;
+
+                if (child.CompareTag("kalp"))
+                {
+                    Destroy(child);
+                    organDolabi.kalplerListesi.Remove(child);
+                    Debug.Log("kalp sil");
+                    kalpSilindi = true; // Bir kalp silindiðinde bayrak true yapýlýr
+                    break; // Ýçteki döngüden çýk
+                }
             }
-           
+
+            if (kalpSilindi)
+            {
+                break; // Eðer bir kalp silindi ise dýþtaki döngüden de çýk
+            }
         }
+
+
         Destroy(gameObject);
     }
     public void Sell()
@@ -75,7 +86,11 @@ public class Satilacak_Organ : MonoBehaviour
         organFoto.SetActive(false);
         changepriceButton.SetActive(true);
         gameObject.transform.SetParent(pc.contentIlanlarým.transform);//ilanlarým paneline atýyor 
-
+        foreach (var kalp in organDolabi.kalplerListesi)
+        {
+            organDolabi.kalplerListesi.Remove(kalp);
+            break;
+        }
         StartCoroutine(SatisSuresiBelirle(fiyat));
         
         price.text = fiyat.ToString("0.00") + "$";

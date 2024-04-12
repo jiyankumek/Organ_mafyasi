@@ -7,7 +7,8 @@ public class Organ_dolabi : MonoBehaviour
     
 
     public List<GameObject> kalplerListesi = new List<GameObject>();
-
+    public List<Transform> dolapKapasitesi=new List<Transform>();
+    
      
     // Start is called before the first frame update
     void Start()
