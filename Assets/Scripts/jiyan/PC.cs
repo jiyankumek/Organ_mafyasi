@@ -99,10 +99,11 @@ public class PC : MonoBehaviour
                     heldObject = hit.collider.gameObject;
                     heldObject.transform.SetParent(objeHand);
                     heldObject.transform.localPosition = Vector3.zero;
-                    heldObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f); // Sýfýr dönüþ açýlarýna ayarla
+                    heldObject.transform.rotation = Quaternion.Euler(0, heldObject.transform.rotation.eulerAngles.y, 0);
                     heldObject.GetComponent<Rigidbody>().isKinematic = true;
                     heldObject.GetComponent<Rigidbody>().useGravity = false;
-                    heldObject.GetComponent<Collider>().enabled = true;
+                    heldObject.GetComponent<Rigidbody>().drag=0;
+                    
                 }
 
                 if (hit.collider.CompareTag("obje") && heldObject == null) // Eðer 'obje'ye basýldýysa ve elinde bir obje yoksa
@@ -236,33 +237,137 @@ public class PC : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && heldObject.CompareTag("sedye"))
+        // Eðer elinizde sedye objesi varsa
+        if (heldObject != null && heldObject.CompareTag("sedye"))
         {
-            // Yerleþtirme kodu
-            heldObject.transform.position = hit.point; // Objeyi raycast'ýn çarptýðý yere yerleþtir
-            heldObject.GetComponent<Rigidbody>().isKinematic = true; // Objeyi fiziksel etkileþime aç
-            heldObject.GetComponent<Rigidbody>().useGravity = true; // Objeyi fiziksel etkileþime aç
-            heldObject.GetComponent<Collider>().enabled = true; // Objeyi çarpýþmalara aç
-            heldObject.transform.SetParent(null);
-            heldObject = null; // Elindeki objeyi sýfýrla
+            // Her karede objenin açýsýný sýfýrlayýn
+           // heldObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+
+            // Elinizdeki objeyi oyuncunun önünde sabit bir mesafede tutun
+            float distanceFromPlayer = 5.0f;
+            Vector3 direction = transform.forward;
+            heldObject.transform.position = transform.position + direction * distanceFromPlayer;
+
+            // Çarpýþma kontrolü
+            Collider heldCollider = heldObject.GetComponent<Collider>();
+            Collider[] hitColliders = Physics.OverlapSphere(heldCollider.bounds.center, heldCollider.bounds.extents.magnitude);
+
+            // `hitColliders` dizisini kontrol ediyoruz
+            if (heldCollider != null && hitColliders != null)
+            {
+                bool isColliding = false;
+
+                // Çarpýþan her bir nesneyi kontrol ediyoruz
+                foreach (Collider collider in hitColliders)
+                {
+                    // Eðer çarpýþan nesne `heldCollider` deðilse ve `tag`'i 'zemin' veya 'Player' deðilse
+                    if (collider != heldCollider && !collider.CompareTag("zemin") && !collider.CompareTag("Player"))
+                    {
+                        isColliding = true;
+                        // Çarpýþan nesnenin adýný yazdýr
+                        Debug.Log($"Çarpýþma var: Nesne adý - {collider.gameObject.name}");
+                        break;
+                    }
+                }
+
+                // Çarpýþma kontrolü sonucuna göre renk ayarlamasý yapýyoruz
+                Renderer renderer = heldObject.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    // Çakýþma varsa renkleri kýrmýzý yapýyoruz
+                    if (isColliding)
+                    {
+                        foreach (Material mat in renderer.materials)
+                        {
+                            // Materyalin albedo (ana rengi) özelliðini kýrmýzý yapýyoruz
+                            mat.color = Color.red;
+                        }
+                    }
+                    // Çakýþma yoksa renkleri yeþil yapýyoruz
+                    else
+                    {
+                        foreach (Material mat in renderer.materials)
+                        {
+                            // Materyalin albedo (ana rengi) özelliðini yeþil yapýyoruz
+                            mat.color = Color.green;
+                        }
+                    }
+                }
+            }
+
+            // Sol fare tuþu býrakýldýðýnda yerleþtirme iþlemi
+            if (Input.GetKeyUp(KeyCode.Mouse0) && heldObject != null)
+            {
+                // Çarpýþma kontrolü gerçekleþtirildi ve çakýþma yoksa
+                bool isColliding = false;
+
+                // `hitColliders` dizisini kontrol ediyoruz
+                if (hitColliders != null)
+                {
+                    foreach (Collider collider in hitColliders)
+                    {
+                        // Eðer çarpýþan nesne `heldCollider` deðilse ve `tag`'i 'zemin' veya 'Player' deðilse
+                        if (collider != heldCollider && !collider.CompareTag("zemin") && !collider.CompareTag("Player"))
+                        {
+                            isColliding = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Eðer çakýþma yoksa yerleþtirme iþlemini gerçekleþtir
+                if (!isColliding)
+                {
+                    // Fiziksel ve çarpýþma özelliklerini etkinleþtir
+                    Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.isKinematic = false;
+                        rb.useGravity = true;
+                        rb.freezeRotation = true;
+                    }
+
+                    Collider collider = heldObject.GetComponent<Collider>();
+                    if (collider != null)
+                    {
+                        collider.enabled = true;
+                    }
+
+                    // Objeyi ebeveyninden ayýrýn
+                    heldObject.transform.SetParent(null);
+
+                    // Renkleri beyaza döndür
+                    Renderer renderer = heldObject.GetComponent<Renderer>();
+                    if (renderer != null)
+                    {
+                        foreach (Material mat in renderer.materials)
+                        {
+                            // Materyalin albedo (ana rengi) özelliðini beyaz yapýyoruz
+                            mat.color = Color.white;
+                        }
+                    }
+
+                    // Elinizdeki objeyi sýfýrlayýn
+                    heldObject = null;
+                }
+            }
+
+            // Q ve E tuþlarý ile y açýsýný deðiþtirme
+            float rotationSpeed = 50f; // Açýyý deðiþtirme hýzý
+            if (Input.GetKey(KeyCode.Q))
+            {
+                // Y ekseninde açýyý azalt
+                heldObject.transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                // Y ekseninde açýyý artýr
+                heldObject.transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+            }
         }
-       /* if (heldObject.CompareTag("sedye"))
-        {
-            // Yerleþtirme kodu
-            Vector3 placementPosition = hit.point;
 
-            // Ýki colliderýn yüksekliklerini al
-            float raycastHitHeight = hit.point.y;
-            float colliderHeight = hit.collider.bounds.max.y;
 
-            // Yüksekliði ayarla
-            float finalHeight = Mathf.Max(raycastHitHeight, colliderHeight); // Yükseklikleri karþýlaþtýr ve büyük olaný seç
-
-            // Objeyi yerleþtir
-            placementPosition.y = finalHeight; // Yüksekliði ayarla
-            heldObject.transform.position = placementPosition; // Objeyi raycast'ýn çarptýðý yere yerleþtir
-            heldObject.transform.rotation = Quaternion.Euler(0, 0, 0); // Objeyi döndürme
-        }*/
     }
 
     public void Buy_Sedye()
