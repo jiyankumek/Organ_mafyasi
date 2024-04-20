@@ -149,8 +149,8 @@ namespace Knife.RealBlood.SimpleController
 
             controlCameraPosition = ControlCamera.localPosition;
 
-             pc = GetComponent<PC>();
-             UnpausePlayer();
+            pc = GetComponent<PC>();
+            UnpausePlayer();
         }
 
         public void UpdateDefaultDeath()
@@ -172,7 +172,7 @@ namespace Knife.RealBlood.SimpleController
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             control.SetActive(false);
-            
+
             Freeze(false);
             isPaused = false;
         }
@@ -191,9 +191,9 @@ namespace Knife.RealBlood.SimpleController
             {
                 PausePlayer();
             }
-            else if(pc.pcCanvasisTrue==false)
+            else if (pc.pcCanvasisTrue == false)
             {
-               UnpausePlayer();
+                UnpausePlayer();
             }
         }
 
@@ -293,14 +293,14 @@ namespace Knife.RealBlood.SimpleController
             else
             {
                 runTime -= Time.deltaTime;
-                
+
                 isRunning = false;
             }
             /*
             if(Input.GetKeyDown(KeyCode.LeftControl) && !freezeControl)
             {
                 isCrouching = true;
-                
+               
                 if(CrouchEvent != null)
                 {
                     CrouchEvent();
@@ -427,9 +427,9 @@ namespace Knife.RealBlood.SimpleController
 
         private void OnCollisionStay(Collision collision)
         {
-            foreach(var c in collision.contacts)
+            foreach (var c in collision.contacts)
             {
-                if(c.otherCollider.attachedRigidbody != null)
+                if (c.otherCollider.attachedRigidbody != null)
                 {
                     c.otherCollider.attachedRigidbody.AddForceAtPosition(PlayerVelocity * Time.fixedDeltaTime * CollisionScale, c.point);
                 }

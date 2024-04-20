@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Knife.RealBlood.SimpleController;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -35,6 +36,7 @@ public class PC : MonoBehaviour
 
     private Economy economy;
     private Organ_dolabi organDolabi;
+    private BloodFX kaneffect;
 
 
     void Start()
@@ -42,7 +44,7 @@ public class PC : MonoBehaviour
         economy= FindObjectOfType<Economy>();
         organDolabi = FindObjectOfType<Organ_dolabi>();
         pcCanvasisTrue = false;
-        
+        kaneffect = GetComponent<BloodFX>();
     }
 
     void Update()
@@ -106,7 +108,7 @@ public class PC : MonoBehaviour
                     
                 }
 
-                if (hit.collider.CompareTag("obje") && heldObject == null) // Eðer 'obje'ye basýldýysa ve elinde bir obje yoksa
+                if (hit.collider.CompareTag("nester") && heldObject == null) // Eðer 'obje'ye basýldýysa ve elinde bir obje yoksa
                 {
                     Debug.Log("nester ");
                     heldObject = hit.collider.gameObject;
@@ -131,10 +133,11 @@ public class PC : MonoBehaviour
 
             if (hit.collider.CompareTag("kesilecek"))
             {
-                Debug.Log("KES");
-                if (heldObject != null && Input.GetMouseButton(0))
+                
+                if (heldObject != null && Input.GetMouseButton(0)&&heldObject.CompareTag("nester"))
                 {
-                    kesilecekYer.SetActive(false);
+                    //kesilecekYer.SetActive(false);
+                    kaneffect.PlayFX(null);
                     kalp.GetComponent<Rigidbody>().isKinematic = false;
                     kalp.GetComponent<Rigidbody>().useGravity = true;
                     Debug.Log("kesildi ve düþtü");
