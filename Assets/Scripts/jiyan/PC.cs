@@ -136,7 +136,7 @@ public class PC : MonoBehaviour
                 
                 if (heldObject != null && Input.GetMouseButton(0)&&heldObject.CompareTag("nester"))
                 {
-                    //kesilecekYer.SetActive(false);
+                    kesilecekYer.SetActive(false);
                     kaneffect.PlayFX(null);
                     kalp.GetComponent<Rigidbody>().isKinematic = false;
                     kalp.GetComponent<Rigidbody>().useGravity = true;
