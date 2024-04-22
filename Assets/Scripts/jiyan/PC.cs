@@ -329,6 +329,7 @@ public class PC : MonoBehaviour
                         rb.isKinematic = false;
                         rb.useGravity = true;
                         rb.freezeRotation = true;
+                        rb.drag = 1;
                     }
 
                     Collider collider = heldObject.GetComponent<Collider>();
@@ -384,6 +385,8 @@ public class PC : MonoBehaviour
         {
             economy.yeterliParaYok.SetActive(true);
         }
+
+        StartCoroutine(economy.SatisSuresiBelirle());
     }
 
     public void Deepweb()

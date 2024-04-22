@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,9 +10,15 @@ public class Economy : MonoBehaviour
     public GameObject yeterliParaYok;
 
     public float money=250;
+
+    public float sure=10;
+
+    public List<GameObject> sedyeSayisi;
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(SatisSuresiBelirle());
+        sedyeSayisi.Clear();
     }
 
     // Update is called once per frame
@@ -43,4 +50,35 @@ public class Economy : MonoBehaviour
     {
         yeterliParaYok.SetActive(false);
     }
+    public IEnumerator SatisSuresiBelirle()
+    {
+        sedyeSayisi.Clear();
+        while (sure > 0)
+        {
+            yield return new WaitForSeconds(1);
+            sure--;
+
+            Debug.Log("Kalan Süre: " + sure); // Kalan süreyi kontrol etmek için Debug.Log kullanýmý
+
+            
+        }
+
+        GameObject[] sedyeler = GameObject.FindGameObjectsWithTag("sedye");
+
+        // Bulunan sedye objelerini listeye ekleyin
+        foreach (GameObject sedye in sedyeler)
+        {
+            if (!sedyeSayisi.Contains(sedye))
+            {
+                sedyeSayisi.Add(sedye);
+            }
+        }
+        
+        Debug.Log("Zaman doldu!");
+        Debug.Log(sedyeSayisi.Count);
+        
+        
+        
+    }
+
 }
