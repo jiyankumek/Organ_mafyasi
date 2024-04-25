@@ -37,6 +37,7 @@ public class PC : MonoBehaviour
     private Economy economy;
     private Organ_dolabi organDolabi;
     private BloodFX kaneffect;
+    private PlayerController playerController;
 
 
     void Start()
@@ -45,6 +46,7 @@ public class PC : MonoBehaviour
         organDolabi = FindObjectOfType<Organ_dolabi>();
         pcCanvasisTrue = false;
         kaneffect = GetComponent<BloodFX>();
+        playerController = GetComponent<PlayerController>();
     }
 
     void Update()
@@ -55,23 +57,30 @@ public class PC : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.E))
             {
+                
                 PcCanvas.enabled = false;
                 pcCanvasisTrue = false;
                 foreach (Transform child in content_satis.transform)
                 {
                     Destroy(child.gameObject);
                 }
+                playerController.Freeze(false);
+                playerController.UnpausePlayer();
 
             }
         }
         else // Canvas kapalýyken
         {
+            
             Eline_Obje_Alip_Birakma();
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 PcCanvas.enabled = false;
                 pcCanvasisTrue = false;
+                playerController.Freeze(false);
+                playerController.UnpausePlayer();
+
             }
         }
     }
@@ -82,19 +91,28 @@ public class PC : MonoBehaviour
         // Karakterden ileri doðru bir raycast ýþýný çýkar
         if (Physics.Raycast(transform.position, transform.forward, out hit, raycastLength))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (hit.collider.CompareTag("pc"))
             {
-                if (hit.collider.CompareTag("pc"))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
+                    
                     PcCanvas.enabled = true;
 
                     pcCanvasisTrue = true;
                     foreach (var organ in organDolabi.kalplerListesi)
                     {
                         Instantiate(Organ_satis, content_satis);
-                       // Destroy(Organ_satis);
+                        // Destroy(Organ_satis);
                     }
+
+                    playerController.Freeze(true);
+                    playerController.PausePlayer();
                 }
+                
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                
 
                 if (hit.collider.CompareTag("sedye") && heldObject == null)
                 {
@@ -129,6 +147,24 @@ public class PC : MonoBehaviour
                     heldObject.GetComponent<Rigidbody>().useGravity = false;
                     heldObject.GetComponent<Collider>().enabled = false;
                 }
+
+                if (hit.collider.CompareTag("hasta"))
+                {
+                    Debug.Log(playerController);
+                    Debug.Log("hasta");
+                    hit.collider.transform.GetChild(8).gameObject.SetActive(true);
+                    playerController.Freeze(true);
+                    playerController.PausePlayer();
+
+                }
+            }
+            if (hit.collider.CompareTag("hasta"))
+            {
+                if (hit.collider.transform.GetChild(8).gameObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+                {
+                    hit.collider.transform.GetChild(8).gameObject.SetActive(false);
+                }
+                
             }
 
             if (hit.collider.CompareTag("kesilecek"))

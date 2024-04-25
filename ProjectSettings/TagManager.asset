@@ -12,6 +12,7 @@ TagManager:
   - kalp
   - nester
   - hastakayit
+  - hasta
   layers:
   - Default
   - TransparentFX

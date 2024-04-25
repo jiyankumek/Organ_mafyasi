@@ -151,6 +151,8 @@ namespace Knife.RealBlood.SimpleController
 
             pc = GetComponent<PC>();
             UnpausePlayer();
+            PausePlayer();
+            Freeze(true);
         }
 
         public void UpdateDefaultDeath()
@@ -158,7 +160,7 @@ namespace Knife.RealBlood.SimpleController
             Look.RotateCameraSmoothlyTo(0, Time.deltaTime);
         }
 
-        private void PausePlayer()
+        public void PausePlayer()
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -167,7 +169,7 @@ namespace Knife.RealBlood.SimpleController
             isPaused = true;
         }
 
-        private void UnpausePlayer()
+        public void UnpausePlayer()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -179,22 +181,15 @@ namespace Knife.RealBlood.SimpleController
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            /*if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (isPaused)
                     UnpausePlayer();
                 else
                     PausePlayer();
-            }
+            }*/
             UpdatePlayer();
-            if (pc.pcCanvasisTrue == true)
-            {
-                PausePlayer();
-            }
-            else if (pc.pcCanvasisTrue == false)
-            {
-                UnpausePlayer();
-            }
+            
         }
 
         void UpdatePlayer()

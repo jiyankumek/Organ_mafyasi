@@ -25,9 +25,8 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-       StartWalking();
-       StopWalking();
+        StartWalking();
+        StopWalking();
     }
 
     
@@ -39,7 +38,6 @@ public class NPC : MonoBehaviour
             agent.SetDestination(hastakayit.transform.position);
             if (npcAnimator != null)
             {
-                Debug.Log("walk");
                 // "walk" durumuna geçmek için "isWalking" parametresini true olarak ayarlayýn
                 npcAnimator.SetBool("isWalking", true);
             }
