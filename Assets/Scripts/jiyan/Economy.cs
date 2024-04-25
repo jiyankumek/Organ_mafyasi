@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Economy : MonoBehaviour
 {
+    public List<Transform> hastaKayitSirasiList;
+    private GameObject hastakayit;
+
+
     public TMP_Text text_Money;
     public GameObject yeterliParaYok;
 
@@ -14,6 +18,18 @@ public class Economy : MonoBehaviour
     public float sure=10;
 
     public List<GameObject> sedyeSayisi;
+
+    void Awake()
+    {
+        hastakayit = GameObject.FindWithTag("hastakayit");
+        hastaKayitSirasiList.Add(hastakayit.transform.GetChild(0));
+        hastaKayitSirasiList.Add(hastakayit.transform.GetChild(1));
+        hastaKayitSirasiList.Add(hastakayit.transform.GetChild(2));
+        hastaKayitSirasiList.Add(hastakayit.transform.GetChild(3));
+        hastaKayitSirasiList.Add(hastakayit.transform.GetChild(4));
+        hastaKayitSirasiList.Add(hastakayit.transform.GetChild(5));
+    }
+
     // Start is called before the first frame update
     void Start()
     {

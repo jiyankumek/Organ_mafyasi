@@ -160,6 +160,7 @@ public class PC : MonoBehaviour
             }
             if (hit.collider.CompareTag("hasta"))
             {
+                
                 if (hit.collider.transform.GetChild(8).gameObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
                 {
                     hit.collider.transform.GetChild(8).gameObject.SetActive(false);
