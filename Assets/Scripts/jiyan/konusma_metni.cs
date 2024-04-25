@@ -7,6 +7,7 @@ public class KonusmaMetni : MonoBehaviour
 {
     public TMP_Text konusmaMetni;
     public TMP_Text fiyatMetni;
+    public TMP_Text yuksekFiyat;
     public TMP_InputField FiyatGirdisiInputField;
 
     public GameObject ContentGameObject;
@@ -82,6 +83,19 @@ public class KonusmaMetni : MonoBehaviour
 
         
         FiyatGirdisiInputField.gameObject.SetActive(false);
+
+        yuksekFiyat.gameObject.SetActive(true);
+        if (fiyat >= 200)
+        {
+            
+            yuksekFiyat.text = "NEEE " + fiyat+" dolar mý? Burasý resmen dolandýrmak üzerine kurulmuþ! Ben gidiyorum!!!";
+            yuksekFiyat.color=Color.red;
+            yuksekFiyat.fontStyle = FontStyles.Bold;
+        }
+        else if (fiyat < 200)
+        {
+
+        }
         
     }
 
